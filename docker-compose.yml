@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres:16.3-alpine
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: postgres
+    ports:
+      - "2345:2345"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+volumes:
+  db_data:
