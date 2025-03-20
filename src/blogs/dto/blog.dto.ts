@@ -1,5 +1,5 @@
 export class BlogDto {
-    id: string
+    id: number
     title: string
     publishDate: string
     content: string

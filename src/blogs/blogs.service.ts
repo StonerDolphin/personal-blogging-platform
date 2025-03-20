@@ -1,26 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { Blog } from './interface/blog.interface';
-import { PrismaClient } from '@prisma/client';
+import { PrismaService } from '../../prisma.service';
+import { Prisma, Blog } from '@prisma/client';
 
 @Injectable()
 export class BlogsService {
-  constructor(private repo: PrismaClient) {}
+  constructor(private prisma: PrismaService) {}
 
-  create(blog: Blog) {
-    this.repo.blog.create({
-      data: {
-        id: blog.id,
-        title: blog.title,
-        publishDate: blog.publishDate,
-        content: blog.content,
-        tag: blog.tag,
-      },
-    });
+ async create(data: Prisma.BlogCreateInput): Promise<Blog> {
+  return this.prisma.blog.create({
+    data
+  })
+ }
+
+  async findOne(id: Prisma.BlogWhereUniqueInput): Promise<Blog | null> {
+    return this.prisma.blog.findUnique({
+      where: id
+    })
   }
 
-  findAll() {}
-
-  findOne() {}
+  findAll() {}  
 
   update() {}
 
