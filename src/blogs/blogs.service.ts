@@ -22,5 +22,9 @@ export class BlogsService {
 
   update() {}
 
-  delete() {}
+  async delete(where: Prisma.BlogWhereUniqueInput): Promise<Blog> {
+    return this.prisma.blog.delete({
+      where,
+    })
+  }
 }
