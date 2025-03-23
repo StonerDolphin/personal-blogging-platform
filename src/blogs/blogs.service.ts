@@ -18,7 +18,22 @@ export class BlogsService {
     })
   }
 
-  findAll() {}  
+  async findAll(param: {
+    skip?: number
+    take?: number
+    cursor?: Prisma.BlogWhereUniqueInput
+    where?: Prisma.BlogWhereInput
+    orderBy?: Prisma.BlogOrderByWithRelationInput
+  }): Promise<Blog[]> {
+    const {skip, take, cursor, where, orderBy} = param
+    return this.prisma.blog.findMany({
+      skip,
+      take,
+      cursor,
+      where,
+      orderBy
+    })
+  }  
 
   update() {}
 
